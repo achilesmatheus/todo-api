@@ -3,12 +3,18 @@
 namespace Todo.Controllers;
 
 [ApiController]
+[Route("")]
 public class HomeController : ControllerBase
 {
-    [HttpGet("/")]
+    // Heath check
+    [HttpGet("")]
     public IActionResult Get()
     {
-        return Ok("");
+        return Ok(new
+        {
+            Title = "Api heath check",
+            Online = true
+        });
     }
 
     [HttpGet("/{id:int}")]
