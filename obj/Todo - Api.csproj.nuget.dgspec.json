@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\achil\\Desktop\\CSharp\\todo-app - api\\todo-app - api.csproj": {}
+    "C:\\Users\\achil\\Desktop\\CSharp\\Todo - Api\\Todo - Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\achil\\Desktop\\CSharp\\todo-app - api\\todo-app - api.csproj": {
+    "C:\\Users\\achil\\Desktop\\CSharp\\Todo - Api\\Todo - Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\achil\\Desktop\\CSharp\\todo-app - api\\todo-app - api.csproj",
-        "projectName": "todo-app - api",
-        "projectPath": "C:\\Users\\achil\\Desktop\\CSharp\\todo-app - api\\todo-app - api.csproj",
+        "projectUniqueName": "C:\\Users\\achil\\Desktop\\CSharp\\Todo - Api\\Todo - Api.csproj",
+        "projectName": "Todo - Api",
+        "projectPath": "C:\\Users\\achil\\Desktop\\CSharp\\Todo - Api\\Todo - Api.csproj",
         "packagesPath": "C:\\Users\\achil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\achil\\Desktop\\CSharp\\todo-app - api\\obj\\",
+        "outputPath": "C:\\Users\\achil\\Desktop\\CSharp\\Todo - Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
