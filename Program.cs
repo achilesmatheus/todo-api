@@ -1,6 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
-app.MapGet("/", () => Results.Redirect("s"));
+app.MapControllers();
 
 app.Run();
