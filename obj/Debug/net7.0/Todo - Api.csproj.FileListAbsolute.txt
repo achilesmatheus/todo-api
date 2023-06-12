@@ -1,0 +1,26 @@
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\appsettings.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\Todo - Api.exe
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\Todo - Api.deps.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\Todo - Api.runtimeconfig.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\Todo - Api.dll
+C:\Users\achil\Desktop\CSharp\Todo - Api\bin\Debug\net7.0\Todo - Api.pdb
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.csproj.AssemblyReference.cache
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.AssemblyInfoInputs.cache
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.AssemblyInfo.cs
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.csproj.CoreCompileInputs.cache
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets\msbuild.Todo - Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets\msbuild.build.Todo - Api.props
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Todo - Api.props
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Todo - Api.props
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\scopedcss\bundle\Todo - Api.styles.css
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.dll
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\refint\Todo - Api.dll
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.pdb
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\Todo - Api.genruntimeconfig.cache
+C:\Users\achil\Desktop\CSharp\Todo - Api\obj\Debug\net7.0\ref\Todo - Api.dll
