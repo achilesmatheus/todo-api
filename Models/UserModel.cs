@@ -1,4 +1,4 @@
-﻿namespace Todo;
+﻿namespace Todo.Models;
 
 public class UserModel
 {
