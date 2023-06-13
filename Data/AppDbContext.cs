@@ -5,7 +5,7 @@ namespace Todo.Data;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<TaskModel> Todos { get; set; }
+    public DbSet<TaskModel> Tasks { get; set; }
     public DbSet<ListModel> Lists { get; set; }
     public DbSet<FolderModel> Folders { get; set; }
 
