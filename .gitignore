@@ -31,6 +31,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+[Mm]igrations/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -476,4 +477,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-Migrations/*
+app.db
