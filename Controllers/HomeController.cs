@@ -3,11 +3,10 @@
 namespace Todo.Controllers;
 
 [ApiController]
-[Route("")]
 public class HomeController : ControllerBase
 {
     // Heath check
-    [HttpGet("")]
+    [HttpGet("v1")]
     public IActionResult Get()
     {
         return Ok(new
