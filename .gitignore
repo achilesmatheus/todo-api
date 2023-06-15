@@ -478,4 +478,6 @@ $RECYCLE.BIN/
 *.lnk
 
 app.db
+app.db-shm
+app.db-wal
 Tasks.MD
