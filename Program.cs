@@ -16,6 +16,7 @@ builder.Services
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<TokenService>();
 builder.Services.AddTransient<TaskRepository>();
+builder.Services.AddTransient<ListRepository>();
 
 var app = builder.Build();
 
