@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Todo.Models;
 using Todo.Repositories;
+using Todo.Repositories.Contracts;
 using Todo.ViewModels;
 
 namespace Todo.Controllers;
@@ -12,7 +13,7 @@ public class ListController : ControllerBase
 {
     [HttpGet("lists")]
     public async Task<IActionResult> GetAll(
-        [FromServices] ListRepository repository
+        [FromServices] IListRepository repository
     )
     {
         try
@@ -31,7 +32,7 @@ public class ListController : ControllerBase
 
     [HttpGet("list/{id:int}")]
     public async Task<IActionResult> GetById(
-        [FromServices] ListRepository repository,
+        [FromServices] IListRepository repository,
         [FromRoute] int id
     )
     {
@@ -57,7 +58,7 @@ public class ListController : ControllerBase
 
     [HttpPost("list")]
     public async Task<IActionResult> CreateList(
-        [FromServices] ListRepository repository,
+        [FromServices] IListRepository repository,
         [FromBody] ListViewModel model
     )
     {
@@ -66,8 +67,6 @@ public class ListController : ControllerBase
             var list = new ListModel
             {
                 Name = model.Name,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
             };
 
             await repository.CreateAsync(list);
@@ -92,7 +91,7 @@ public class ListController : ControllerBase
 
     [HttpPut("list/{id:int}")]
     public async Task<IActionResult> UpdateList(
-        [FromServices] ListRepository repository,
+        [FromServices] IListRepository repository,
         [FromBody] ListViewModel model,
         [FromRoute] int id
     )
@@ -125,7 +124,7 @@ public class ListController : ControllerBase
     [HttpPut("list/{listId:int}/folder/{folderId:int}")]
     public async Task<IActionResult> MoveListToFolder(
        [FromServices] FolderRepository folderRepository,
-       [FromServices] ListRepository listRepository,
+       [FromServices] IListRepository listRepository,
        [FromRoute] int listId,
        [FromRoute] int folderId
 
@@ -141,6 +140,34 @@ public class ListController : ControllerBase
 
             folder.AddList(list);
             await listRepository.UpdateAsync(list);
+
+            var result = new ResultViewModel<ListModel>(list);
+            return StatusCode(200, result);
+        }
+        catch (DbUpdateException ex)
+        {
+            var result = new ResultViewModel<string>(ex.Message);
+            return StatusCode(404, result);
+        }
+        catch
+        {
+            var result = new ResultViewModel<string>("Internal server error");
+            return StatusCode(500, result);
+        }
+    }
+
+    [HttpDelete("list/{id:int}")]
+    public async Task<IActionResult> DeleteAsync(
+        [FromServices] IListRepository repository,
+        [FromRoute] int id
+    )
+    {
+        try
+        {
+            var list = await repository.GetByIdAsync(id);
+            if (list == null) throw new DbUpdateException($"The list with id '{id}' does not exist");
+
+            await repository.DeleteAsync(list);
 
             var result = new ResultViewModel<ListModel>(list);
             return StatusCode(200, result);
