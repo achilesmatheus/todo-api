@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Todo.Models;
 using Todo.Repositories;
+using Todo.Repositories.Contracts;
 using Todo.ViewModels;
 
 namespace Todo.Controllers;
@@ -12,7 +13,7 @@ public class FolderController : ControllerBase
 {
     [HttpGet("folders")]
     public async Task<IActionResult> GetAll(
-        [FromServices] FolderRepository repository
+        [FromServices] IFolderRepository repository
     )
     {
         try
@@ -31,7 +32,7 @@ public class FolderController : ControllerBase
 
     [HttpGet("folder/{id:int}")]
     public async Task<IActionResult> GetById(
-        [FromServices] FolderRepository repository,
+        [FromServices] IFolderRepository repository,
         [FromRoute] int id
     )
     {
@@ -57,7 +58,7 @@ public class FolderController : ControllerBase
 
     [HttpPost("folder")]
     public async Task<IActionResult> CreateList(
-        [FromServices] FolderRepository repository,
+        [FromServices] IFolderRepository repository,
         [FromBody] FolderViewModel model
     )
     {
@@ -92,7 +93,7 @@ public class FolderController : ControllerBase
 
     [HttpPut("folder/{id:int}")]
     public async Task<IActionResult> UpdateList(
-        [FromServices] FolderRepository repository,
+        [FromServices] IFolderRepository repository,
         [FromBody] FolderViewModel model,
         [FromRoute] int id
     )
@@ -106,6 +107,34 @@ public class FolderController : ControllerBase
             folder.UpdatedAt = DateTime.Now;
 
             await repository.UpdateAsync(folder);
+
+            var result = new ResultViewModel<FolderModel>(folder);
+            return StatusCode(200, result);
+        }
+        catch (DbUpdateException ex)
+        {
+            var result = new ResultViewModel<string>(ex.Message);
+            return StatusCode(404, result);
+        }
+        catch
+        {
+            var result = new ResultViewModel<string>("Internal server error");
+            return StatusCode(500, result);
+        }
+    }
+
+    [HttpDelete("folder/{id:int}")]
+    public async Task<IActionResult> DeleteAsync(
+        [FromServices] IFolderRepository repository,
+        [FromRoute] int id
+    )
+    {
+        try
+        {
+            var folder = await repository.GetByIdAsync(id);
+            if (folder == null) throw new DbUpdateException($"The folder with id '{id}' does not exist");
+
+            await repository.DeleteAsync(folder);
 
             var result = new ResultViewModel<FolderModel>(folder);
             return StatusCode(200, result);
