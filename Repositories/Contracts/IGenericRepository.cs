@@ -3,8 +3,8 @@
 public interface IGenericRepository<T> where T : class
 {
     Task<T> GetByIdAsync(int id);
-    Task<T> GetFirstAsync();
-    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync(int skip, int take);
     Task CreateAsync(T entity);
     Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
 }
