@@ -1,6 +1,8 @@
-﻿namespace Todo.Repositories.Contracts;
+﻿using Todo.Models;
 
-public interface ITaskRepository<T> : IGenericRepository<T> where T : class
+namespace Todo.Repositories.Contracts;
+
+public interface ITaskRepository : IGenericRepository<TaskModel>
 {
-    Task<IEnumerable<T>> GetByPeriodAsync(DateTime date);
+    Task<IEnumerable<TaskModel>> GetByPeriodAsync(DateTime date);
 }
