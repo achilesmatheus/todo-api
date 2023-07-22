@@ -8,6 +8,10 @@ Clone this repository
 ```bash
 git clone https://github.com/achilesmatheus/todo-api.git
 ```
+Navigate to project
+```bash
+cd todo-api
+```
 
 Run
 ```bash
