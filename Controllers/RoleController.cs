@@ -1,22 +1,24 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 using Todo.Models;
 using Todo.Repositories.Contracts;
 using Todo.ViewModels;
 
 namespace Todo.Controllers;
 
-[Authorize(Roles = "User")]
+// [Authorize(Roles = "User")]
 [ApiController]
 [Route("v1")]
 public class RoleController : ControllerBase
 {
-    [HttpGet("/roles")]
+    [SwaggerOperation(Summary = "Returns a list of roles")]
+    [HttpGet("roles")]
     public async Task<IActionResult> GetAll(
         [FromServices] IRoleRepository repository,
-        [FromQuery] int skip,
-        [FromQuery] int take
+        [FromQuery] int skip = 0,
+        [FromQuery] int take = 5
     )
     {
         try
@@ -38,12 +40,12 @@ public class RoleController : ControllerBase
         }
     }
 
-
+    [SwaggerOperation(Summary = "Return a role with provided id")]
     [HttpGet("role/{id:int}")]
     public async Task<IActionResult> GetById(
-        [FromServices] IRoleRepository repository,
-        [FromRoute] int id
-    )
+            [FromServices] IRoleRepository repository,
+            [FromRoute] int id
+        )
     {
         try
         {
@@ -65,6 +67,7 @@ public class RoleController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Creates a new role")]
     [HttpPost("role")]
     public async Task<IActionResult> CreateTask(
     [FromServices] IRoleRepository repository,
@@ -96,6 +99,7 @@ public class RoleController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Updates a role")]
     [HttpPut("role/{id:int}")]
     public async Task<IActionResult> UpdateTask(
         [FromServices] IRoleRepository repository,
@@ -128,6 +132,7 @@ public class RoleController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Deletes a role")]
     [HttpDelete("role/{id:int}")]
     public async Task<IActionResult> Delete(
         [FromServices] IRoleRepository repository,

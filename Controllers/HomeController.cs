@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Todo.Controllers;
 
 [ApiController]
 public class HomeController : ControllerBase
 {
-    // Heath check
+    [SwaggerOperation(Summary = "Api heath check")]
     [HttpGet("v1")]
     public IActionResult Get()
     {
