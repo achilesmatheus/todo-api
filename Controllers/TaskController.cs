@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 using Todo.Models;
 using Todo.Repositories;
 using Todo.Repositories.Contracts;
@@ -7,18 +9,22 @@ using Todo.ViewModels;
 
 namespace Todo.Controllers;
 
+// [Authorize(Roles = "User")]
 [ApiController]
 [Route("v1")]
 public class TaskController : ControllerBase
 {
+    [SwaggerOperation(Summary = "Returns a list of tasks")]
     [HttpGet("tasks")]
     public async Task<IActionResult> GetAll(
-        [FromServices] ITaskRepository repository
+        [FromServices] ITaskRepository repository,
+        [FromQuery] int skip,
+        [FromQuery] int take
     )
     {
         try
         {
-            var tasks = await repository.GetAllAsync();
+            var tasks = await repository.GetAllAsync(skip, take);
             var result = new ResultViewModel<IEnumerable<TaskModel>>(tasks);
             return StatusCode(200, result);
 
@@ -30,11 +36,12 @@ public class TaskController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Return a user with provided id")]
     [HttpGet("task/{id:int}")]
     public async Task<IActionResult> GetById(
-        [FromServices] ITaskRepository repository,
-        [FromRoute] int id
-    )
+            [FromServices] ITaskRepository repository,
+            [FromRoute] int id
+        )
     {
         try
         {
@@ -56,6 +63,7 @@ public class TaskController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Returns a list of tasks that match the provided date")]
     [HttpGet("tasks/{date:datetime}")]
     public async Task<IActionResult> GetByPeriod(
         [FromServices] ITaskRepository repository,
@@ -83,6 +91,7 @@ public class TaskController : ControllerBase
 
     }
 
+    [SwaggerOperation(Summary = "Creates a new Task")]
     [HttpPost("task")]
     public async Task<IActionResult> CreateTask(
         [FromServices] ITaskRepository repository,
@@ -117,6 +126,7 @@ public class TaskController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Updates a task")]
     [HttpPut("task/{id:int}")]
     public async Task<IActionResult> UpdateTask(
         [FromServices] ITaskRepository repository,
@@ -150,6 +160,7 @@ public class TaskController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Marks a task as done")]
     [HttpPut("task/{id:int}/mark-as-done")]
     public async Task<IActionResult> MarkAsDone(
         [FromServices] ITaskRepository repository,
@@ -180,6 +191,7 @@ public class TaskController : ControllerBase
         }
     }
 
+    [SwaggerOperation(Summary = "Marks a task as undone")]
     [HttpPut("task/{id:int}/mark-as-undone")]
     public async Task<IActionResult> MarkAsUnDone(
         [FromServices] ITaskRepository repository,
@@ -210,43 +222,9 @@ public class TaskController : ControllerBase
         }
     }
 
-    [HttpPut("task/{taskId:int}/list/{listId:int}")]
-    public async Task<IActionResult> MoveTaskToList(
-        [FromServices] TaskRepository repository,
-        [FromServices] IListRepository listRepository,
-        [FromRoute] int taskId,
-        [FromRoute] int listId
-
-    )
-    {
-        try
-        {
-            var task = await repository.GetByIdAsync(taskId);
-            var list = await listRepository.GetByIdAsync(listId);
-
-            if (task == null) throw new DbUpdateException($"Task with id '{listId}' could not be found");
-            if (list == null) throw new DbUpdateException($"List with id '{taskId}' could not be found");
-
-            list.AddTask(task);
-            await repository.UpdateAsync(task);
-
-            var result = new ResultViewModel<TaskModel>(task);
-            return StatusCode(200, result);
-        }
-        catch (DbUpdateException ex)
-        {
-            var result = new ResultViewModel<string>(ex.Message);
-            return StatusCode(404, result);
-        }
-        catch
-        {
-            var result = new ResultViewModel<string>("Internal server error");
-            return StatusCode(500, result);
-        }
-    }
-
+    [SwaggerOperation(Summary = "Deletes a task")]
     [HttpDelete("task/{id:int}")]
-    public async Task<IActionResult> DeleteAsync(
+    public async Task<IActionResult> Delete(
     [FromServices] ITaskRepository repository,
     [FromRoute] int id
 )
