@@ -17,10 +17,12 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         await _context.SaveChangesAsync();
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync()
+    public virtual async Task<IEnumerable<T>> GetAllAsync(int skip = 0, int take = 5)
     {
         return await _context.Set<T>()
             .AsNoTracking()
+            .Skip(skip * take)
+            .Take(take)
             .ToListAsync();
     }
 
@@ -29,18 +31,13 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async Task<T> GetFirstAsync()
-    {
-        return await _context.Set<T>().FirstOrDefaultAsync();
-    }
-
     public async Task UpdateAsync(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 
-    public virtual async Task DeleteAsync(T entity)
+    public async Task DeleteAsync(T entity)
     {
         _context.Remove(entity);
         await _context.SaveChangesAsync();
