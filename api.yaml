@@ -1,0 +1,368 @@
+---
+openapi: 3.0.1
+info:
+  title: JWTToken_Auth_API
+  version: v1
+paths:
+  '/v1/signin':
+    post:
+      tags:
+        - Account
+      summary: Creates a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/CreateUserViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/CreateUserViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/CreateUserViewModel'
+      responses:
+        '200':
+          description: Success
+  '/v1/login':
+    post:
+      tags:
+        - Account
+      summary: Login user and returns a JWT key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/UserViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/UserViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/UserViewModel'
+      responses:
+        '200':
+          description: Success
+  '/v1/user/{userId}/role/{roleId}':
+    post:
+      tags:
+        - Account
+      summary: Assign user to role
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: roleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  '/v1':
+    get:
+      tags:
+        - Home
+      summary: Api heath check
+      responses:
+        '200':
+          description: Success
+  '/v1/roles':
+    get:
+      tags:
+        - Role
+      summary: Returns a list of roles
+      parameters:
+        - name: skip
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: take
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 5
+      responses:
+        '200':
+          description: Success
+  '/v1/role/{id}':
+    get:
+      tags:
+        - Role
+      summary: Return a role with provided id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - Role
+      summary: Updates a role
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Role
+      summary: Deletes a role
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  '/v1/role':
+    post:
+      tags:
+        - Role
+      summary: Creates a new role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/RoleViewModel'
+      responses:
+        '200':
+          description: Success
+  '/v1/tasks':
+    get:
+      tags:
+        - Task
+      summary: Returns a list of tasks
+      parameters:
+        - name: skip
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: take
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  '/v1/task/{id}':
+    get:
+      tags:
+        - Task
+      summary: Return a user with provided id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - Task
+      summary: Updates a task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Task
+      summary: Deletes a task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  '/v1/tasks/{date}':
+    get:
+      tags:
+        - Task
+      summary: Returns a list of tasks that match the provided date
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Success
+  '/v1/task':
+    post:
+      tags:
+        - Task
+      summary: Creates a new Task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+          text/json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+          application/*+json:
+            schema:
+              '$ref': '#/components/schemas/TaskViewModel'
+      responses:
+        '200':
+          description: Success
+  '/v1/task/{id}/mark-as-done':
+    put:
+      tags:
+        - Task
+      summary: Marks a task as done
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  '/v1/task/{id}/mark-as-undone':
+    put:
+      tags:
+        - Task
+      summary: Marks a task as undone
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    CreateUserViewModel:
+      required:
+        - email
+        - name
+        - password
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    RoleViewModel:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    TaskViewModel:
+      required:
+        - title
+      type: object
+      properties:
+        title:
+          minLength: 1
+          type: string
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserViewModel:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description:
+        "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter
+        'Bearer' [space] and then your token in the text input below.\r\n\r\nExample:
+        \"Bearer 1safsfsdfdfd\""
+      name: Authorization
+      in: header
+security:
+  - Bearer: []
